@@ -25,7 +25,7 @@ const Details = () => {
     console.log(images,'main')
     const { data, loading } = useFetch(path+'/videos');
     const { data: credits, loading: creditsLoading } = useFetch(path+'/credits');
-    console.log(mediaType,id, seasonID,'-----m,i,s')
+    console.log(mediaType,id, seasonID,'-----m,i,s', path)
     return (
         <div>
             <DetailsBanner video={data?.results?.[0]} crew={credits?.crew} seasonNumber={seasonID}/>

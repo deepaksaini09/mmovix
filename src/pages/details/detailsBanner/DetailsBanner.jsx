@@ -241,8 +241,8 @@ const DetailsBanner = ({ video, crew, seasonNumber }) => {
         </div>
 
             <Offers></Offers>
-        {mediaType ==='tv'?<SeasonDetails mediaType={mediaType} id={id} data={data?.seasons || seasonData?.seasons} loading={loading} seasonNumber={data?.number_of_seasons || seasonData?.number_of_seasons}></SeasonDetails>:<></>}
-            {mediaType ==='tv'?<SeasonEpisode mediaType={mediaType} id={id} seasonNumber={data?.number_of_seasons || seasonNumber?.length>0}></SeasonEpisode>:<></>}
+            {mediaType ==='tv'?<SeasonDetails mediaType={mediaType} id={id} data={data?.seasons || seasonData?.seasons} loading={loading} seasonNumber={data?.number_of_seasons || seasonData?.number_of_seasons}></SeasonDetails>:<></>}
+            {mediaType ==='tv'?<SeasonEpisode mediaType={mediaType} id={id} seasonNumber={data?.number_of_seasons }></SeasonEpisode>:<></>}
         </div>
     );
 };

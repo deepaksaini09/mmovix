@@ -3,8 +3,14 @@ import useFetch from "../../../hooks/useFetch.jsx";
 import './style.scss'
 import dayjs from "dayjs";
 function SeasonEpisode({mediaType,id,seasonNumber}){
+    if (seasonNumber){
+        seasonNumber = seasonNumber
+    }else {
+        seasonNumber = 1
+    }
     const { data, loading } = useFetch(`/${mediaType}/${id}/season/${seasonNumber}`);
     return(
+        <div>{ data?.episodes &&
         <div className={'margin-left-offers'}>
             <div className={'item-color'}>EPISODE DETAILS</div>
             {data?.episodes.map((index, value)=>{
@@ -24,7 +30,8 @@ function SeasonEpisode({mediaType,id,seasonNumber}){
                     </div>
                 )
             })}
-        </div>
+            </div>
+        }</div>
     )
 
 }
