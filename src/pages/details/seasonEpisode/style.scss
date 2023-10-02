@@ -1,0 +1,42 @@
+//.card-accordion-sec {
+//    background: #04152d;
+//    //box-shadow: 0 1px 2px 0 gray;
+//    //border: 20px;
+//    padding: 16px;
+//  .item-color{
+//    color: white;
+//
+//
+//  }
+//}
+//
+.margin-left-offers{
+    margin-left: 10px;
+  .item-color{
+    color: white;
+  }
+  }
+@media screen and (min-width: 1200px) {
+  .margin-left-offers{
+    margin-left: 150px;
+    margin-right: 150px;
+  }
+}
+.item-color{
+        color:white;
+        margin-bottom: 20px;
+    }
+.episodes-item__heading{
+    align-items: center;
+    border-bottom: 1px solid black;
+    margin-bottom: 30px;
+
+}
+.episodes-item__heading--title {
+    color: #78a6b8;
+    font-weight: 400;
+  margin-top: 10px;
+  .fontSize{
+   font-size: 12px;
+}
+}

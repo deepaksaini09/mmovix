@@ -1,0 +1,57 @@
+.rotate-text {
+transform:rotate(90deg);
+  margin-bottom: 40px;
+}
+/* CSS */
+.flex-container-offers-heading {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  border-style: outset;
+  //border-style: ;
+}
+
+
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    gap: 2px;
+    //border-style: outset;
+    //border-style: ;
+  //margin-right: -23px;
+
+}
+.flex-item {
+  margin-left: 2px;
+}
+.textAlignItemForCenter{
+  text-align: center;
+}
+.rotate-text-new {
+   writing-mode: vertical-lr;
+   transform: scale(-1, -1);
+  text-align: center;
+}
+
+.padding-headline{
+  padding: 0 20px 10px 0;
+}
+.colorWhite{
+  color: white;
+}
+.font-bold{
+    font-weight: 700;
+}
+.colorBlack{
+  color:black;
+  //border: 1px solid black;
+  //border-radius: 1px;
+}
+.margin-left-offers{
+    margin-left: 10px;
+  }
+@media screen and (min-width: 1200px) {
+  .margin-left-offers{
+    margin-left: 150px;
+  }
+}
