@@ -15,7 +15,7 @@ import PageNotFound from "./pages/404/PageNotFound";
 
 function App() {
     const dispatch = useDispatch();
-    const { url } = useSelector((state) => state.home);
+    const { url,contentTitle } = useSelector((state) => state.home);
     console.log(url);
 
     useEffect(() => {
@@ -54,7 +54,8 @@ function App() {
 
         dispatch(getGenres(allGenres));
     };
-
+    document.title = contentTitle;
+    console.log(contentTitle,'contentTitle')
     return (
         <BrowserRouter>
             <Header />
@@ -63,7 +64,7 @@ function App() {
                 <Route path="/:mediaType/:id" element={<Details />} />
                 <Route path="/search/:query" element={<SearchResult />} />
                 <Route path="/explore/:mediaType" element={<Explore />} />
-                <Route path="/season/:mediaType/:id/:seasonID" element={<Details />}></Route>
+                <Route path="/:mediaType/:id/:seasonID" element={<Details />}></Route>
                 <Route path="*" element={<PageNotFound />} />
             </Routes>
             <Footer />

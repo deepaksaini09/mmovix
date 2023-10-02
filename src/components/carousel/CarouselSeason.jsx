@@ -33,7 +33,9 @@ const CarouselSeason = ({ data, loading, endpoint, title ,id }) => {
         });
     };
     // console.log(endpoint,'endpoint')
-
+    const navigateToOtherFun = (pathVar)=>{
+        navigate(pathVar);
+    }
     const skItem = () => {
         return (
             <div className="skeletonItem">
@@ -68,10 +70,7 @@ const CarouselSeason = ({ data, loading, endpoint, title ,id }) => {
                                 <div
                                     key={item.id}
                                     className="carouselItem"
-                                    onClick={() =>
-                                        navigate(
-                                            `/season/${item.media_type || endpoint}/${id}/${item?.season_number}`
-                                        )
+                                    onClick={() =>navigateToOtherFun(`/${item.media_type || endpoint}/${id}/${item?.season_number}`)
                                     }
                                 >
                                     <div className="posterBlock">

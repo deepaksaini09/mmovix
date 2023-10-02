@@ -16,6 +16,7 @@ import VideoPopup from "../../../components/videoPopup/VideoPopup";
 import SeasonDetails from "../carousels/SeasonDetails.jsx";
 import SeasonEpisode from "../seasonEpisode/SeasonEpisode.jsx";
 import Offers from "../../../components/offers/Offers.jsx";
+import {getContentTitle} from "../../../store/homeSlice.js";
 
 const DetailsBanner = ({ video, crew, seasonNumber }) => {
     const [show, setShow] = useState(false);
@@ -38,12 +39,13 @@ const DetailsBanner = ({ video, crew, seasonNumber }) => {
     const writer = crew?.filter(
         (f) => f.job === "Screenplay" || f.job === "Story" || f.job === "Writer"
     );
-    console.log(data,'--data--')
     const toHoursAndMinutes = (totalMinutes) => {
         const hours = Math.floor(totalMinutes / 60);
         const minutes = totalMinutes % 60;
         return `${hours}h${minutes > 0 ? ` ${minutes}m` : ""}`;
     };
+    const dispatch = useDispatch();
+    dispatch(getContentTitle(data?.name || data?.title)) ;
 
     return (
         <div>
@@ -53,7 +55,7 @@ const DetailsBanner = ({ video, crew, seasonNumber }) => {
                     {!!data && (
                         <React.Fragment>
                             <div className="backdrop-img">
-                                <Img src={url.backdrop + data.backdrop_path} />
+                                <Img src={url?.backdrop + data.backdrop_path} />
                             </div>
                             <div className="opacity-layer"></div>
                             <ContentWrapper>
@@ -63,7 +65,7 @@ const DetailsBanner = ({ video, crew, seasonNumber }) => {
                                             <Img
                                                 className="posterImg"
                                                 src={
-                                                    url.backdrop +
+                                                    url?.backdrop +
                                                     data.poster_path
                                                 }
                                             />
@@ -77,7 +79,7 @@ const DetailsBanner = ({ video, crew, seasonNumber }) => {
                                     <div className="right">
                                         <div className="title">
                                             {`${
-                                                data.name || data.title
+                                                data?.name || data?.title
                                             } (${dayjs(
                                                 data?.release_date
                                             ).format("YYYY")})`}
@@ -90,7 +92,7 @@ const DetailsBanner = ({ video, crew, seasonNumber }) => {
 
                                         <div className="row">
                                             <CircleRating
-                                                rating={data.vote_average.toFixed(
+                                                rating={data?.vote_average?.toFixed(
                                                     1
                                                 )}
                                             />
@@ -98,7 +100,7 @@ const DetailsBanner = ({ video, crew, seasonNumber }) => {
                                                 className="playbtn"
                                                 onClick={() => {
                                                     setShow(true);
-                                                    setVideoId(video.key);
+                                                    setVideoId(video?.key);
                                                 }}
                                             >
                                                 <PlayIcon />
@@ -113,7 +115,7 @@ const DetailsBanner = ({ video, crew, seasonNumber }) => {
                                                 Overview
                                             </div>
                                             <div className="description">
-                                                {data.overview}
+                                                {data?.overview}
                                             </div>
                                         </div>
 
@@ -124,7 +126,7 @@ const DetailsBanner = ({ video, crew, seasonNumber }) => {
                                                         Status:{" "}
                                                     </span>
                                                     <span className="text">
-                                                        {data.status}
+                                                        {data?.status}
                                                     </span>
                                                 </div>
                                             )}
@@ -135,7 +137,7 @@ const DetailsBanner = ({ video, crew, seasonNumber }) => {
                                                     </span>
                                                     <span className="text">
                                                         {dayjs(
-                                                            data.release_date
+                                                            data?.release_date
                                                         ).format("MMM D, YYYY")}
                                                     </span>
                                                 </div>
@@ -242,7 +244,7 @@ const DetailsBanner = ({ video, crew, seasonNumber }) => {
 
             <Offers></Offers>
             {mediaType ==='tv'?<SeasonDetails mediaType={mediaType} id={id} data={data?.seasons || seasonData?.seasons} loading={loading} seasonNumber={data?.number_of_seasons || seasonData?.number_of_seasons}></SeasonDetails>:<></>}
-            {mediaType ==='tv'?<SeasonEpisode mediaType={mediaType} id={id} seasonNumber={data?.number_of_seasons }></SeasonEpisode>:<></>}
+            {/*{mediaType ==='tv'?<SeasonEpisode mediaType={mediaType} id={id} seasonNumber={data?.number_of_seasons }></SeasonEpisode>:<></>}*/}
         </div>
     );
 };

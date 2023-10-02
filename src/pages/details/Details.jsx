@@ -21,7 +21,7 @@ const Details = () => {
     if(seasonID && mediaType === 'tv'){
         path+='/season/'+seasonID
     }
-    const {data:images, loading:imagesLoading} = useFetch(`/${mediaType}/${id}/images?include_image_language=en,hi,xx,ta`);
+    const {data:images, loading:imagesLoading} = useFetch(`/${mediaType}/${id}/images`);
     console.log(images,'main')
     const { data, loading } = useFetch(path+'/videos');
     const { data: credits, loading: creditsLoading } = useFetch(path+'/credits');
