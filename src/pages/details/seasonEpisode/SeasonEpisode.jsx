@@ -2,17 +2,15 @@ import React from "react";
 import useFetch from "../../../hooks/useFetch.jsx";
 import './style.scss'
 import dayjs from "dayjs";
+import {useSelector} from "react-redux";
 function SeasonEpisode({mediaType,id,seasonNumber}){
-    if (seasonNumber){
-        seasonNumber = seasonNumber
-    }else {
-        seasonNumber = 1
-    }
+    const {currentSeason} = useSelector((state)=>state.home)
     const { data, loading } = useFetch(`/${mediaType}/${id}/season/${seasonNumber}`);
     return(
         <div>{ data?.episodes &&
+
         <div className={'margin-left-offers'}>
-            <div className={'item-color'}>EPISODE DETAILS</div>
+            <div className={'item-color'}>EPISODE DETAILS and current season is {currentSeason}</div>
             {data?.episodes.map((index, value)=>{
                 return(
                     <div key={value} className={'episodes-item__heading'}>

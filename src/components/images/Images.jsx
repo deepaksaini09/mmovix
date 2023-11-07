@@ -10,9 +10,28 @@ import {useSelector} from "react-redux";
 import ImagesPopUp from "./ImagesPopUp.jsx";
 
 const Images = ({ data, loading }) => {
+    console.log(data,'-------data---')
+
     const [show, setShow] = useState(false);
     const [videoId, setVideoId] = useState(null);
     const { url } = useSelector((state) => state.home);
+    const [imagesDataUrl, setImageUrlData] = useState([]);
+    const backdrops = data?.backdrops || []; // Ensure backdrops is an array
+    const [bestImage, setBestImage] = useState([]);
+        let posterUrlsData = [];
+
+        for (let i = 0; i < backdrops.length; i++) {
+          const images = backdrops[i];
+          // console.log(images?.file_path,'=====')
+          const posterUrl = images?.file_path
+            ? url?.poster + images?.file_path
+            : PosterFallback;
+          console.log(posterUrl,'===-')
+
+          // posterUrls.push({'url':posterUrl});
+        }
+        // console.log(posterUrls)
+
     const loadingSkeleton = () => {
         return (
             <div className="skItem">
@@ -24,7 +43,7 @@ const Images = ({ data, loading }) => {
     };
 
     return (
-        <div className="videosSection">
+        <div className="videosSection">{posterUrlsData} &&
             <ContentWrapper>
                 <div className="sectionHeading">Image Gallery</div>
                 {!loading ? (
@@ -33,13 +52,15 @@ const Images = ({ data, loading }) => {
                             const posterUrl = images.file_path
                                 ? url.poster + images.file_path
                                 : PosterFallback;
+
                             return (
                                 <div
                                 key={value}
                                 className="videoItem"
                                 onClick={() => {
-                                    setVideoId(posterUrl);
+                                    // setVideoId(posterUrl);
                                     setShow(true);
+
                                 }}
                             >
                                 <div className="videoThumbnail">
@@ -63,14 +84,15 @@ const Images = ({ data, loading }) => {
                         {loadingSkeleton()}
                     </div>
                 )}
-            </ContentWrapper>
-            <ImagesPopUp
-                show={show}
-                setShow={setShow}
-                videoId={videoId}
-                setVideoId={setVideoId}
-            />
-        </div>
+                </ContentWrapper>
+            {/*<ImagesPopUp*/}
+            {/*    show={show}*/}
+            {/*    setShow={setShow}*/}
+            {/*    videoId={videoId}*/}
+            {/*    setVideoId={setVideoId}*/}
+            {/*    posterUrlData = {posterUrls}*/}
+            {/*></ImagesPopUp>*/}
+</div>
     );
 };
 

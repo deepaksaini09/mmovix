@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import {useState, useEffect, memo} from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { fetchDataFromApi } from "./utils/api";
 
@@ -72,4 +72,4 @@ function App() {
     );
 }
 
-export default App;
+export default memo(App);

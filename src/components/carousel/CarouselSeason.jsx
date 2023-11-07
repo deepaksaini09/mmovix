@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, {memo, useRef} from "react";
 import {
     BsFillArrowLeftCircleFill,
     BsFillArrowRightCircleFill,
@@ -6,7 +6,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import dayjs from "dayjs";
-
+import {useDispatch} from "react-redux";
 import ContentWrapper from "../contentWrapper/ContentWrapper";
 import Img from "../lazyLoadImage/Img";
 import PosterFallback from "../../assets/no-poster.png";
@@ -14,11 +14,13 @@ import CircleRating from "../circleRating/CircleRating";
 import Genres from "../genres/Genres";
 
 import "./style.scss";
+import {getCurrentSeason} from "../../store/homeSlice.js";
 
 const CarouselSeason = ({ data, loading, endpoint, title ,id }) => {
     const carouselContainer = useRef();
-    const { url } = useSelector((state) => state.home);
+    const { url, currentSeason } = useSelector((state) => state.home);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const navigation = (dir) => {
         const container = carouselContainer.current;
 
@@ -33,8 +35,9 @@ const CarouselSeason = ({ data, loading, endpoint, title ,id }) => {
         });
     };
     // console.log(endpoint,'endpoint')
-    const navigateToOtherFun = (pathVar)=>{
-        navigate(pathVar);
+    const setCurrentSeason = (currentSeason)=>{
+        console.log(currentSeason,'--xcurrentSeason')
+        dispatch(getCurrentSeason(currentSeason))
     }
     const skItem = () => {
         return (
@@ -51,7 +54,7 @@ const CarouselSeason = ({ data, loading, endpoint, title ,id }) => {
     return (
         <div className="carousel">
             <ContentWrapper>
-                {title && <div className="carouselTitle">{title}</div>}
+                {title && <div className="carouselTitle">{title}{currentSeason}'--'</div>}
                 <BsFillArrowLeftCircleFill
                     className="carouselLeftNav arrow"
                     onClick={() => navigation("left")}
@@ -70,7 +73,7 @@ const CarouselSeason = ({ data, loading, endpoint, title ,id }) => {
                                 <div
                                     key={item.id}
                                     className="carouselItem"
-                                    onClick={() =>navigateToOtherFun(`/${item.media_type || endpoint}/${id}/${item?.season_number}`)
+                                    onClick={() =>setCurrentSeason(item?.season_number)
                                     }
                                 >
                                     <div className="posterBlock">
@@ -112,4 +115,4 @@ const CarouselSeason = ({ data, loading, endpoint, title ,id }) => {
     );
 };
 
-export default CarouselSeason;
+export default memo(CarouselSeason);

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {memo} from "react";
 
 import useFetch from "../../../hooks/useFetch";
 import CarouselSeason from "../../../components/carousel/CarouselSeason.jsx";
@@ -17,4 +17,4 @@ const SeasonDetails = ({ mediaType, id ,data, loading, seasonNumber}) => {
     );
 };
 
-export default SeasonDetails;
+export default memo(SeasonDetails);

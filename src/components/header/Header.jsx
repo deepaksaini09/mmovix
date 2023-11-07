@@ -77,6 +77,7 @@ const Header = () => {
                     <img src={logo} alt="" />
                 </div>
                 <ul className="menuItems">
+
                     <li
                         className="menuItem"
                         onClick={() => navigationHandler("movie")}

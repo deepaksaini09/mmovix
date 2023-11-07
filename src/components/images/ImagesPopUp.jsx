@@ -3,7 +3,7 @@ import ReactPlayer from "react-player/youtube";
 
 import '../videoPopup/style.scss'
 
-const ImagesPopUp = ({ show, setShow, videoId, setVideoId }) => {
+const ImagesPopUp = ({ show, setShow, videoId, setVideoId, posterUrlData }) => {
     const hidePopup = () => {
         setShow(false);
         setVideoId(null);
@@ -15,14 +15,9 @@ const ImagesPopUp = ({ show, setShow, videoId, setVideoId }) => {
                 <span className="closeBtn" onClick={hidePopup}>
                     Close
                 </span>
-                <img src={videoId} alt="Images" width='100%' />
-                {/*<ReactPlayer*/}
-                {/*    */}
-                {/*    controls*/}
-                {/*    width="100%"*/}
-                {/*    height="100%"*/}
-                {/*    // playing={true}*/}
-                {/*/>*/}
+                {/*<img src={videoId} alt="Images" width='100%' />*/}
+
+
             </div>
         </div>
     );

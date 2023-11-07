@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, {memo, useRef} from "react";
 import {
     BsFillArrowLeftCircleFill,
     BsFillArrowRightCircleFill,
@@ -115,4 +115,4 @@ const Carousel = ({ data, loading, endpoint, title }) => {
     );
 };
 
-export default Carousel;
+export default memo(Carousel);

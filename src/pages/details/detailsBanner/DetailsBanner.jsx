@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {memo, useState} from "react";
 import { useParams } from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import dayjs from "dayjs";
@@ -16,7 +16,7 @@ import VideoPopup from "../../../components/videoPopup/VideoPopup";
 import SeasonDetails from "../carousels/SeasonDetails.jsx";
 import SeasonEpisode from "../seasonEpisode/SeasonEpisode.jsx";
 import Offers from "../../../components/offers/Offers.jsx";
-import {getContentTitle} from "../../../store/homeSlice.js";
+import {getContentTitle, getCurrentSeason} from "../../../store/homeSlice.js";
 
 const DetailsBanner = ({ video, crew, seasonNumber }) => {
     const [show, setShow] = useState(false);
@@ -32,7 +32,7 @@ const DetailsBanner = ({ video, crew, seasonNumber }) => {
     }
 
     const { data, loading } = useFetch(path);
-    const { url } = useSelector((state) => state.home);
+    const { url,currentSeason } = useSelector((state) => state.home);
     const _genres = data?.genres?.map((g) => g.id);
 
     const director = crew?.filter((f) => f.job === "Director");
@@ -46,6 +46,8 @@ const DetailsBanner = ({ video, crew, seasonNumber }) => {
     };
     const dispatch = useDispatch();
     dispatch(getContentTitle(data?.name || data?.title)) ;
+    if(currentSeason!==data?.number_of_seasons){
+       dispatch(getCurrentSeason(data?.number_of_seasons));}
 
     return (
         <div>
@@ -244,9 +246,9 @@ const DetailsBanner = ({ video, crew, seasonNumber }) => {
 
             <Offers></Offers>
             {mediaType ==='tv'?<SeasonDetails mediaType={mediaType} id={id} data={data?.seasons || seasonData?.seasons} loading={loading} seasonNumber={data?.number_of_seasons || seasonData?.number_of_seasons}></SeasonDetails>:<></>}
-            {/*{mediaType ==='tv'?<SeasonEpisode mediaType={mediaType} id={id} seasonNumber={data?.number_of_seasons }></SeasonEpisode>:<></>}*/}
+            {mediaType ==='tv'?<SeasonEpisode mediaType={mediaType} id={id} seasonNumber={data?.number_of_seasons }></SeasonEpisode>:<></>}
         </div>
     );
 };
 
-export default DetailsBanner;
+export default memo(DetailsBanner);

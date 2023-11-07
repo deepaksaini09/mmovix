@@ -5,7 +5,8 @@ export const homeSlice = createSlice({
     initialState: {
         url: {},
         genres: {},
-        contentTitle:dataTitle
+        contentTitle:dataTitle,
+        currentSeason:null
 
     },
     reducers: {
@@ -18,12 +19,15 @@ export const homeSlice = createSlice({
         getContentTitle:(state,action)=>{
             state.contentTitle = action.payload+dataTitle
         },
+        getCurrentSeason:(state, action)=>{
+            state.currentSeason = action.payload;
+        }
 
 
     },
 });
 
 // Action creators are generated for each case reducer function
-export const { getApiConfiguration, getGenres,getContentTitle } = homeSlice.actions;
+export const { getApiConfiguration, getGenres,getContentTitle,getCurrentSeason } = homeSlice.actions;
 
 export default homeSlice.reducer;

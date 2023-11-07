@@ -1,4 +1,4 @@
-import React from "react";
+import React, {memo} from "react";
 import { useParams } from "react-router-dom";
 import "./style.scss";
 
@@ -41,4 +41,4 @@ const Details = () => {
     );
 };
 
-export default Details;
+export default memo(Details);
